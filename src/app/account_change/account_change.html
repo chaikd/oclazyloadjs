@@ -1,0 +1,241 @@
+<div class="menu_bar">
+    <ul class="d4">
+        <li class="speed" ng-class="{'menu_s':account_change.status==1}">
+            <div class="menu_img"><img src="assets/images/mt15.png"/></div>
+            <h6>1.变更申请</h6>
+        </li>
+        <li class="speed" ng-class="{'menu_s':account_change.status==2}">
+            <div class="menu_img"><img src="assets/images/mt16.png"/></div>
+            <h6>2.生成授权书</h6>
+        </li>
+        <li class="speed" ng-class="{'menu_s':account_change.status==3}">
+            <div class="menu_img"><img src="assets/images/mt17.png"/></div>
+            <h6>3.上传授权书</h6>
+        </li>
+        <li class="speed" ng-class="{'menu_s':account_change.status=='success'}">
+            <div class="menu_img"><img src="assets/images/mt18.png"/></div>
+            <h6>4.变更成功</h6>
+        </li>
+    </ul>
+</div>
+<!--flex_cont-->
+<div class="">
+    <div class="lg_bd minh bdw_box gta_con">
+        <ul class="fi_br" ng-show="account_change.status==1">
+            <li class="pg_bs">
+                <h5 class="cr_2">变更账号开户人</h5>
+                <div class="pg_tbs">
+                    <div class="input_rc in_r in_rc_s" ng-if="account_change.a.customername!='-'">
+                        <input ng-model="account_change.b.name" value="{{account_change.a.customername}}" checked
+                               data="0"
+                               id="act_type1" name="act_type" type="radio"/>
+                        <span></span>
+                        <label for="act_type1">主借人</label>
+                    </div>
+                    <div class="input_rc in_r in_rc_s" ng-if="account_change.a.wereborrowed!='-'">
+                        <input ng-model="account_change.b.name" value="{{account_change.a.wereborrowed}}" data="1"
+                               id="act_type2" name="act_type" type="radio"/>
+                        <span></span>
+                        <label for="act_type2">共借人</label>
+                    </div>
+                </div>
+            </li>
+            <li class="pg_tm pg_bs">
+                <h5 class="cr_2">姓名</h5>
+                <div class="input_li">
+                    <input ng-model="account_change.b.name" disabled placeholder="请输入您的真实姓名"/>
+                    <img class="cr_3 display emptied" onclick="emptied(this)" src="assets/images/xx.png" />
+                </div>
+            </li>
+            <li class="pg_tm pg_bs">
+                <h5 class="cr_2">银行名称</h5>
+                <div class="input_li">
+                    <select id="bankName">
+                        <option value="0">请选择银行</option>
+                        <option ng-repeat="b in account_change.a.bankinfo" value="{{b.cardnumber}}"
+                                code="{{b.bankcode}}" data="{{b.bankname}}"
+                                ng-bind="b.bankname"></option>
+                    </select>
+                </div>
+            </li>
+            <li class="pg_tm pg_bs">
+                <h5 class="cr_2">账户号码</h5>
+                <div class="input_li flex_i">
+                    <input id="bankNum" type="text" placeholder="请输入您的账号号码"
+                           ng-model="account_change.bankNum" ng-change="account_change.bank()"/>
+                    <img class="cr_3 display emptied" onclick="emptied(this)" src="assets/images/xx.png" />
+                </div>
+            </li>
+            <li class="pg_tm pg_bs">
+                <h5 class="cr_2">是否生成划款授权书
+                    <a href="#" class="ft_r cr_6" ng-click="account_change.showproxy()">查看案例</a>
+                </h5>
+
+                <div class="pg_tbs">
+                    <div class="input_rc in_r in_rc_s">
+                        <input id="act_type4" ng-model="account_change.b.isneedimg" value="Y" name="act_type2"
+                               type="radio"/>
+                        <span></span>
+                        <label for="act_type4">是</label>
+                    </div>
+                    <div class="input_rc in_r in_rc_s">
+                        <input ng-model="account_change.b.isneedimg" value="N" id="act_type3" name="act_type2" value="n"
+                               type="radio" checked="checked"/>
+                        <span></span>
+                        <label for="act_type3">不，我已有</label>
+                    </div>
+                </div>
+            </li>
+            <button class="btn mn_ts" ng-click="account_change.nexts()">确定提交</button>
+        </ul>
+
+        <div class="res fadeInLeft" ng-show="account_change.status==2">
+            <p class="prompt prompt2">请长按图片 保存到手机</p>
+            <!--<div class="grbd_i cr_2 agreement">-->
+            <div class="flex_cont" style="height: 500px;">
+                <img id="preview" src="{{account_change.proxy}}"/>
+                <!--<img style="min-height: 500px;" id="preview" src="{{account_change.proxy}}"/>-->
+            </div>
+            <button class="btn mn_ts" ng-click="account_change.certificateconfirm('1')">下一步</button>
+        </div>
+
+        <ul class="fi_br mn_ts fadeInLeft" ng-show="account_change.status==3">
+            <!--<p class="prompt prompt2 displays img_success">图片已上传成功</p>-->
+            <p class="prompt prompt2" ng-if="account_change.businessStatus==3">图片已上传成功</p>
+            <li class="pg_bs" ng-if="account_change.businessStatus!=3">
+                <h5 class="cr_2"><span class="cr_r">*</span>上传银行卡(正，反面)</h5>
+                <ul class="up_img" id="idimg" data="7001_zhbg">
+                    <!--<li class="file_li">-->
+                        <!--<div class="img_i11 file_img">-->
+                            <!--<p><span>0</span>/10</p>-->
+                            <!--<input accept="image/*" type="file"-->
+                                   <!--onchange="previewimg(this)"/>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                    <li class="file_li">
+                        <div class="img_i11 file_img">
+                            <!--<p><span>0</span>/10</p>-->
+                            <p>银行卡正面</p>
+                            <input accept="image/*" type="file"
+                                                           onchange="previewimgs(this)"/>
+                        </div>
+                    </li>
+                    <!--<li class="file_li">-->
+                        <!--<div class="img_i11 file_img">-->
+                            <!--&lt;!&ndash;<p><span>0</span>/10</p>&ndash;&gt;-->
+                            <!--<p>反面</p>-->
+                            <!--<input accept="image/*" type="file"-->
+                                                           <!--onchange="previewz(this)"/>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                </ul>
+            </li>
+            <li class="pg_tm pg_bs" ng-if="account_change.businessStatus!=3">
+                <h5 class="cr_2"><span class="cr_r">*</span>上传划款授权书</h5>
+                <ul class="up_img" id="proxyimg" data="7001_zhbg">
+                    <li class="file_li">
+                        <div class="img_i11 file_img">
+                            <p><span>0</span>/10</p><input accept="image/*" type="file"
+                                                           onchange="previewimg(this)"/>
+                        </div>
+                    </li>
+                </ul>
+                <div class="input_rc in_c in_rc_s mn_ln mn_tbl">
+                    <input id="check_proxy" name="check_proxy" type="checkbox" />
+                    <span></span>
+                    <label for="check_proxy">划款授权书和承诺书我已签字</label>
+                </div>
+            </li>
+            <li class="pg_tm pg_bs">
+                <h5 class="cr_2">备注</h5>
+                <div class="input_li mn_ts">
+                    <textarea id="commentcontent" ng-model="account_change.commentcontent" placeholder="请输入您的备注信息" onfocus="scroll(this)"></textarea>
+                </div>
+            </li>
+            <div class="flex_i mn_ts">
+                <button class="btn btn2 flex_auto mn_rm" ng-click="account_change.lasts()">上一步</button>
+                <button class="btn flex_auto flex_w2" ng-if="account_change.imgStatus==22" ng-click="account_change.cmsTaskSubmit()">确定提交</button>
+                <button class="btn flex_auto flex_w2" ng-if="account_change.businessStatus==3" ng-click="account_change.submitTask()">确定提交</button>
+                <button class="btn flex_auto flex_w2" ng-if="account_change.businessStatus!=3&&!account_change.imgStatus" ng-click="account_change.cmsTaskSubmit()">确定提交</button>
+                <!--<button class="btn flex_auto flex_w2" ng-if="account_change.imgStatus==22" ng-click="account_change.uploadimg()">确定提交</button>-->
+                <!--<button class="btn flex_auto flex_w2" ng-if="account_change.businessStatus==3" ng-click="account_change.submitTask()">确定提交</button>-->
+                <!--<button class="btn flex_auto flex_w2" ng-if="account_change.businessStatus!=3&&!account_change.imgStatus" ng-click="account_change.cmsTaskSubmit()">确定提交</button>-->
+            </div>
+        </ul>
+
+        <div class="txt_cer" ng-show="account_change.status=='success'" >
+            <img class="width65 mn_tb" src="assets/images/pt04.png" />
+            <h4 class="mn_tbb pg_tm">变更账户信息已提交</h4>
+            <button class="btn" ng-click="account_change.closes()">关闭</button>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="pop_up_bd picture">-->
+<!--</div>-->
+
+<div class="pop_up_bd p1" style="display: block;" ng-if="account_change.checkTaskOk==1">
+    <div class="pop_up pg_tbm txt_cer pg_lrs">
+        <h3 class="bold mn_tl" style="color: #da5959;">系统提示</h3>
+        <div class="txt_cer pg_lrl mn_ts">
+            <p class="dis_in txt_lt">因银行受理时间限制，我司变更账户业务截止时间为：每个工作日的下午三点。暂时无法提交，请工作日提交，谢谢。 </p>
+        </div>
+        <ul class="flex_i mn_tm">
+            <li class="flex_auto pg_l">
+                <!--<button  ng-click="account_change.closehtml('p1')" class="btn">我知道了</button>-->
+                <button ng-click="account_change.closes()" class="btn">我知道了</button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="pop_up_bd p2 tada" style="display: block;" ng-if="account_change.status==2">
+    <div class="pop_up pg_tbm txt_cer pg_lrs">
+        <h3 class="bold mn_tl">提醒</h3>
+        <div class="txt_cer pg_lrl mn_ts">
+            <!--<p class="dis_in txt_lt">尊敬的客户，请尽快将签署后的划款授权书及银行卡<span class="cr_r">正，反</span>面拍照上传，方可受理</p>-->
+            <p class="dis_in txt_lt">尊敬的客户，请将《划款授权书和承诺书》打印后，本人签字确认，并将《划款授权书和承诺书》和银行卡<span class="cr_r">正.反</span>面上传。
+        </div>
+        <ul class="flex_i mn_tm">
+            <li class="flex_auto pg_l">
+                <button ng-click="account_change.closehtml('p2')" class="btn">我知道了</button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="pop_up_bd show" ng-if="account_change.confirm">
+    <div class="pop_up">
+        <div class="pop_con pg_tbm txt_cer pg_lrs cr_1">
+            <h3 class="bold mn_tl">确认提醒</h3>
+            <div class="txt_cer pg_lrl cr_2 mn_ts">
+                <h5 class="dis_in txt_lt">请确认划款授权书已保存到本地</h5>
+            </div>
+            <ul class="flex_i mn_tm">
+                <li class="flex_auto pg_l" ng-click="account_change.certificateconfirm()">
+                    <button class="btn btn2">取消</button>
+                </li>
+                <li class="flex_auto pg_l" ng-click="account_change.nexts('img')">
+                    <button class="btn">确定</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="pop_up_bd show pulse" ng-if="account_change.message">
+    <div class="pop_up pg_tbm txt_cer pg_lrs">
+        <h3 class="bold mn_tl">提醒</h3>
+        <div class="txt_cer pg_lrl mn_ts">
+            <p class="dis_in txt_lt" ng-bind="account_change.message"></p>
+        </div>
+        <ul class="flex_i mn_tm">
+            <li class="flex_auto pg_l">
+                <button ng-click="account_change.closes()" class="btn">我知道了</button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script src="assets/preview.min.js"></script>

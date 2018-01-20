@@ -1,0 +1,151 @@
+/*-变更申请-*/
+.menu_img {
+    width: 2rem;
+    height: 2rem;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-bottom: 0.25rem;
+}
+
+.menu_img > img {
+    width: 100%;
+    margin-top: -100%;
+}
+
+.menu_s .menu_img > img {
+    margin-top: 0;
+}
+
+.menu_bar h6 {
+    color: #b2b2b2;
+    font-size: 0.625rem;
+    line-height: 1rem;
+    margin-bottom: -0.25rem;
+    word-break: keep-all;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.menu_bar .menu_s h6 {
+    color: #0b55a4;
+    font-size: 0.725rem;
+}
+/*-补充材料-*/
+.menu_bar {
+    padding: 0.375rem 0.875rem 0;
+    margin-top: 0.375rem;
+    margin-bottom: -0.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.menu_bar > ul {
+    width: 100%;
+    background-color: #f5f5f5;
+    border-radius: 0.375rem 0.375rem 0 0;
+    box-shadow: 0 -0.1rem 0.75rem 0 rgba(0, 0, 0, 0.1) inset;
+    position: relative;
+}
+
+.menu_bar > ul:before {
+    content: "";
+    position: absolute;
+    left: 0.05rem;
+    right: 0.05rem;
+    top: 100%;
+    z-index: 2;
+    margin: auto;
+    height: 1rem;
+    background: linear-gradient(to bottom,
+    #fff 0.5rem,
+    rgba(255, 255, 255, 0) 100%);
+}
+
+.menu_bar > ul:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.menu_bar li {
+    width: 50%;
+    float: left;
+    padding: 0.75rem 0 0.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    border-radius: 0 0.5rem 0 0;
+    position: relative;
+    font-size: 0.925rem;
+    box-shadow: 0.25rem 0.125rem 0.5rem -0.1rem rgba(0, 0, 0, 0.1);
+}
+
+.menu_bar li:after {
+    content: "";
+}
+
+.menu_bar li:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: 1px;
+    box-shadow: 0 0.0375rem 0 0 #cdd6df inset;
+    z-index: 2;
+}
+
+.menu_bar li.menu_s {
+    position: relative;
+    z-index: 1;
+    margin-top: -0.375rem;
+    padding: 0.95rem 0 0.675rem;
+    background-color: #fff;
+    border-radius: 0.5rem 0.5rem 0 0;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1),
+    0.0375rem 0.0375rem 0 0 #cdd6df inset,
+    -0.0375rem 0 0 0 #cdd6df inset;
+}
+
+.menu_bar li.menu_s:after {
+    content: "";
+    width: auto;
+    height: 0.2rem;
+    position: absolute;
+    left: 0.05rem;
+    right: 0.05rem;
+    top: 100%;
+    z-index: 2;
+    margin: -0.1rem auto 0;
+    background: #fff;
+    box-shadow: none;
+}
+
+.d4 > li {
+    width: 25% !important;
+}
+
+.minh {
+    min-height: 100%;
+}
+
+.bdw_box {
+    position: relative;
+    z-index: 1;
+    padding: 1.5rem 1.75rem 1.75rem;
+}
+
+.bdw_box:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0.875rem;
+    right: 0.875rem;
+    bottom: 0.875rem;
+    z-index: -1;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0px 0px 0px 0.0375rem #cdd6df inset;
+    border-radius: 0.5rem;
+}
