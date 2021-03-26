@@ -1,5 +1,5 @@
 # oclazyloadjs
-利用lclazyload实现angular项目文件按需加载
+利用lclazyload实现angularjs项目文件按需加载
 
 启动项目
 
